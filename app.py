@@ -19,17 +19,17 @@ def default_route():
 @app.route('/js/<path:path>')
 def send_js(path):
     """ Serves static JavaScript content """
-    return send_from_directory('static/js', path)
+    return send_from_directory('js', path)
 
 @app.route('/css/<path:path>')
 def send_css(path):
     """ Serves static CSS content """
-    return send_from_directory('static/css', path)
+    return send_from_directory('css', path)
 
-@app.route('/media/<path:path>')
+@app.route('/img/<path:path>')
 def send_media(path):
     """ Serves static Media content (images, or whatever is in that media folder) """
-    return send_from_directory('static/media', path)
+    return send_from_directory('img', path)
 
 if __name__ == '__main__':
     app.run(debug=True)
