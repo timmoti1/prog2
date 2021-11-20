@@ -1,10 +1,14 @@
 import sqlite3
 from typing import Text
 from flask import Flask
-from flask import render_template, send_from_directory
+from flask import render_template, send_from_directory, redirect, url_for
 import datetime
 
 DATABASE = 'database.db'
+
+testitems=[
+    {"title": "bla", "description": "boo"}
+]
 
 app = Flask(__name__)
 app.secret_key = 'any random string'
@@ -14,7 +18,23 @@ def default_route():
     """
     this is the default route, just like the "index.html" file of a website.
     """
-    return render_template('index.html')
+    return redirect(url_for("display_backlog"))
+
+@app.route("/backlog")
+def display_backlog():
+    return render_template('index.html', page=0, items=testitems)
+
+@app.route("/active")
+def display_active():
+    return render_template('index.html', page=1)
+
+@app.route("/done")
+def display_done():
+    return render_template('index.html', page=2)
+
+@app.route("/archived")
+def display_archived():
+    return render_template('index.html', page=3)
 
 @app.route('/js/<path:path>')
 def send_js(path):

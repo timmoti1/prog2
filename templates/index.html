@@ -11,7 +11,7 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
   <!-- Custom CSS -->
-  <link href="style.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
 
   <title>Todo List</title>
 </head>
@@ -25,29 +25,31 @@
         <!-- Navigation for TODO list -->
         <ul class="nav nav-tabs bgw">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Backlog</a>
+            <a class="nav-link {% if page==0 %} active {% endif %}" aria-current="page" href="/backlog">Backlog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Active</a>
+            <a class="nav-link {% if page==1 %} active {% endif %}" href="/active">Active</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Done</a>
+            <a class="nav-link {% if page==2 %} active {% endif %}" href="/done">Done</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Archived</a>
+            <a class="nav-link {% if page==3 %} active {% endif %}" href="/archived">Archived</a>
           </li>
         </ul>
 
         <!-- actual TODO list -->
         <div class="list-group">
-          <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+          {% for item in items %}
+          <a href="#" class="list-group-item list-group-item-action" aria-current="true">
             <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">List group item heading</h5>
-              <small>3 days ago</small>
+              <h5 class="mb-1">{{ item["title"] }}</h5>
+              <small class="text-muted">3 days ago</small>
             </div>
-            <p class="mb-1">Some placeholder content in a paragraph.</p>
+            <p class="mb-1">{{ item["description"] }}</p>
             <small>And some small print.</small>
           </a>
+          {% endfor %}
           <a href="#" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">List group item heading</h5>
