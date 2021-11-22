@@ -1,17 +1,27 @@
 import sqlite3
 from typing import Text
 from flask import Flask
-from flask import render_template, send_from_directory, redirect, url_for
+from flask import render_template, send_from_directory, redirect, url_for, g
 import datetime
 
 DATABASE = 'database.db'
+
+def get_db():
+    """
+    Flask SQLite3 connector
+    (code taken from Flask documentation)
+    """
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect(DATABASE)
+    return db
 
 testitems=[
     {"title": "bla", "description": "boo"}
 ]
 
 app = Flask(__name__)
-app.secret_key = 'any random string'
+app.secret_key = 'hey i am very secure'
 
 @app.route("/")
 def default_route():
