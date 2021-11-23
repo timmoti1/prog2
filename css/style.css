@@ -2,10 +2,11 @@ body {
     background: url("/img/bg.jpg");
     background-position: center;
     background-size: cover;
+    min-height: 100vh;
 }
 
 .h-100 {
-    min-height: 100vh;
+    /*min-height: 100vh;*/
 }
 
 .mcenter {
