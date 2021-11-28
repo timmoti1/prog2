@@ -46,6 +46,10 @@ def display_done():
 def display_archived():
     return render_template('index.html', page=3)
 
+@app.route("/stats")
+def statisitcs():
+    return render_template('statistics.html')
+
 @app.route('/js/<path:path>')
 def send_js(path):
     """ Serves static JavaScript content """
