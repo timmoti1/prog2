@@ -21,7 +21,7 @@ testitems=[
 ]
 
 app = Flask(__name__)
-app.secret_key = 'hey i am very secure'
+app.secret_key = 'hey bob, this is my secret love letter to you.' #what alice might have said, but eve would not understand it.
 
 @app.route("/")
 def default_route():
