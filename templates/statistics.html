@@ -37,56 +37,29 @@
     <div class="row">
       <div class="col mcenter">
 
-        <!-- Navigation for TODO list -->
-        <ul class="nav nav-tabs bgw">
-          <li class="nav-item">
-            <a class="nav-link {% if page==0 %} active {% endif %}" aria-current="page" href="/backlog">Backlog</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if page==1 %} active {% endif %}" href="/active">Active</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if page==2 %} active {% endif %}" href="/done">Done</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if page==3 %} active {% endif %}" href="/archived">Archived</a>
-          </li>
-        </ul>
-
-        <!-- actual TODO list -->
+        <!-- statistics list -->
         <div class="list-group">
-          {% for item in items %}
-          <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">{{ item["title"] }}</h5>
-              <small class="text-muted">3 days ago</small>
-            </div>
-            <p class="mb-1">{{ item["description"] }}</p>
-            <small>And some small print.</small>
-          </a>
-          {% endfor %}
           <a href="#" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">List group item heading</h5>
-              <small class="text-muted">3 days ago</small>
+              <h5 class="mb-1">Statistics</h5>
             </div>
-            <p class="mb-1">Some placeholder content in a paragraph.</p>
-            <small class="text-muted">And some muted small print.</small>
-          </a>
-          <a href="#" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">List group item heading</h5>
-              <small class="text-muted">3 days ago</small>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-            <div class="d-flex w-100 justify-content-between">
-              <p class="mb-1">Some placeholder content in a paragraph.</p>
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-primary">Edit</button>
-                <button type="button" class="btn btn-primary">Move To Next Bucket</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-              </div>
-            </div>
-
+            <p class="mb-1">
+              <span class="badge bg-primary">Backlog (count)</span>
+            </p>
+            <p class="mb-1">
+              <span class="badge bg-warning text-dark">Active (count)</span>
+            </p>
+            <p class="mb-1">
+              <span class="badge bg-success">Done (count)</span>
+            </p>
+            <p class="mb-1">
+              <span class="badge bg-secondary">Archived (count)</span>
+            </p>
           </a>
         </div>
       </div>
