@@ -32,6 +32,7 @@ def default_route():
 
 @app.route("/backlog")
 def display_backlog():
+
     return render_template('index.html', page=0, items=testitems)
 
 @app.route("/active")
@@ -48,7 +49,15 @@ def display_archived():
 
 @app.route("/stats")
 def statisitcs():
-    return render_template('statistics.html')
+    """
+    Display statistics (how many items are in what category)
+    Possible categories: backlog, active, donw, archived.
+
+    This function gets all items from DB and calculates the percentage per category and passes a dict to template.
+    """
+
+
+    return render_template('statistics.html', pbar={"backlog": 10, "active": 10, "done": 10, "archived": 10})
 
 @app.route('/js/<path:path>')
 def send_js(path):
