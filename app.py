@@ -16,9 +16,14 @@ def get_db():
         db = g._database = sqlite3.connect(DATABASE)
     return db
 
-testitems=[
-    {"title": "bla", "description": "boo"}
-]
+def query_db(query, args=(), one=False):
+    """
+    Taken from Flask documentation. Example on how to query the DB (single and multi-row results posible)
+    """
+    cur = get_db().execute(query, args)
+    rv = cur.fetchall()
+    cur.close()
+    return (rv[0] if rv else None) if one else rv
 
 app = Flask(__name__)
 app.secret_key = 'hey bob, this is my secret love letter to you.' #what alice might have said, but eve would not understand it.
@@ -33,7 +38,20 @@ def default_route():
 @app.route("/backlog")
 def display_backlog():
 
-    return render_template('index.html', page=0, items=testitems)
+    list_items = query_db("select * from todo")
+    backlog_list = []
+
+    print(list_items)
+
+    #convert results to dict per our own specifications
+    for item in list_items:
+        entry = dict()
+        entry["title"] = item[1]
+        entry["description"] = item[2]
+        
+        backlog_list.append(entry)
+
+    return render_template('index.html', page=0, items=backlog_list)
 
 @app.route("/active")
 def display_active():
