@@ -41,8 +41,6 @@ def display_backlog():
     list_items = query_db("select * from todo where status = 0")
     backlog_list = []
 
-    print(list_items)
-
     #convert results to dict per our own specifications
     for item in list_items:
         entry = dict()
@@ -59,8 +57,6 @@ def display_active():
 
     list_items = query_db("select * from todo where status = 1")
     active_list = []
-
-    print(list_items)
 
     #convert results to dict per our own specifications
     for item in list_items:
@@ -79,8 +75,6 @@ def display_done():
     list_items = query_db("select * from todo where status = 2")
     done_list = []
 
-    print(list_items)
-
     #convert results to dict per our own specifications
     for item in list_items:
         entry = dict()
@@ -98,8 +92,6 @@ def display_archived():
     list_items = query_db("select * from todo where status = 3")
     archived_list = []
 
-    print(list_items)
-
     #convert results to dict per our own specifications
     for item in list_items:
         entry = dict()
@@ -110,6 +102,11 @@ def display_archived():
         archived_list.append(entry)
 
     return render_template('index.html', page=3, items=archived_list)
+
+@app.route("/edit")
+def edit_note():
+
+    return render_template('index.html')
 
 @app.route("/stats")
 def statisitcs():
