@@ -106,7 +106,7 @@ def display_archived():
 @app.route("/edit")
 def edit_note():
 
-    return render_template('index.html')
+    return render_template('edit.html')
 
 @app.route("/stats")
 def statisitcs():
