@@ -1,7 +1,7 @@
 import sqlite3
 from typing import Text
 from flask import Flask
-from flask import render_template, send_from_directory, redirect, url_for, g
+from flask import render_template, send_from_directory, redirect, url_for, g, request
 import datetime
 
 DATABASE = 'database.db'
@@ -105,8 +105,22 @@ def display_archived():
 
 @app.route("/edit")
 def edit_note():
+    task_id = request.args.get('tid', type=int)    
 
-    return render_template('edit.html')
+    fdat = dict()
+    fdat["duedate"] = None
+    fdat["title"] = None
+    fdat["description"] = None
+    fdat["taskid"] = 0
+
+    if task_id is not None:
+        task_data = query_db("select * from todo where ID = ?", [task_id], one=True)
+        fdat["title"] = task_data[1]
+        fdat["description"] = task_data[2]
+        fdat["duedate"] = task_data[4]
+        fdat["taskid"] = task_id
+
+    return render_template('edit.html', fdat = fdat)
 
 @app.route("/stats")
 def statisitcs():
