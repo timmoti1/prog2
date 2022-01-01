@@ -25,6 +25,14 @@ def query_db(query, args=(), one=False):
     cur.close()
     return (rv[0] if rv else None) if one else rv
 
+def write_db(query, args=()):
+    """
+    copy paste from above function with minor changes documented in flask documentation to be able to write to the db.
+    """
+    cur = get_db().execute(query, args)
+    get_db().commit()
+    cur.close()
+
 app = Flask(__name__)
 app.secret_key = 'hey bob, this is my secret love letter to you.' #what alice might have said, but eve would not understand it.
 
@@ -103,8 +111,15 @@ def display_archived():
 
     return render_template('index.html', page=3, items=archived_list)
 
-@app.route("/edit")
+@app.route("/edit", methods=["GET", "POST"])
 def edit_note():
+
+    if request.method == "POST":
+
+
+    if request.method == "GET":
+
+    
     task_id = request.args.get('tid', type=int)    
 
     fdat = dict()
