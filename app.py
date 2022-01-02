@@ -52,9 +52,10 @@ def display_backlog():
     #convert results to dict per our own specifications
     for item in list_items:
         entry = dict()
+        entry["taskid"] = item[0]
         entry["title"] = item[1]
         entry["description"] = item[2]
-        entry["modified"] = "today"
+        entry["modified"] = item[3]
         
         backlog_list.append(entry)
 
@@ -119,18 +120,29 @@ def edit_note():
         description = request.form.get("form_description")
         taskid = request.form.get("form_taskid", type=int)
         duedate = request.form.get("form_duedate")
-        today_str = datetime.date.today().strftime("%Y-%m-&d")
+        today_str = datetime.date.today().strftime("%Y-%m-%d")
 
         if taskid == 0:
             write_db("insert into todo (title, content, modification_date, due_date, status) values (?, ?, ?, ?, 0)", [title, description, today_str, duedate])
         
         else:
-            write_db("update todo set title = ?, content = ?, modification_date = ?, due_date = ?", [title, description, today_str, duedate])
+            write_db("update todo set title = ?, content = ?, modification_date = ?, due_date = ? where ID = ?", [title, description, today_str, duedate, taskid])
         
         return redirect(url_for("display_backlog"))
 
     
-    task_id = request.args.get('tid', type=int)    
+    task_id = request.args.get('tid', type=int)
+    action_type = request.args.get('action', type=str)
+
+    if action_type is not None:
+        if action_type == "delete":
+            write_db("delete from todo where ID = ?", [task_id])
+        if action_type == "move":
+            stat = query_db("select status from todo where ID = ?", [task_id], one=True)
+            new_stat = int(stat[0]) + 1
+            write_db("update todo set status = ? where ID = ?", [new_stat, task_id])
+
+        return redirect(url_for("display_backlog"))
 
     fdat = dict()
     fdat["duedate"] = None

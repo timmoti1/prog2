@@ -29,6 +29,9 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/stats">Statistics</a>
           </li>
+          <li class="nav-item">
+            <a class="btn btn-primary" aria-current="page" href="/edit">Create Task</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -65,9 +68,9 @@
             <div class="d-flex w-100 justify-content-between">
               <p class="mb-1">{{ item["description"] }}</p>
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-primary">Edit</button>
-                <button type="button" class="btn btn-primary">Move To Next Bucket</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <a href="/edit?tid={{ item["taskid"] }}" class="btn btn-primary">Edit</a>
+                <a href="/edit?tid={{ item["taskid"] }}&action=move" type="button" class="btn btn-primary">Move To Next Bucket</a>
+                <a href="/edit?tid={{ item["taskid"] }}&action=delete" type="button" class="btn btn-danger">Delete</a>
               </div>
             </div>
           </div>
