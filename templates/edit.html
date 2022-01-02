@@ -38,16 +38,22 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Edit List Entry</h5>
-            <form>
+            <form method="POST", action="/edit">
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Title</span>
-                <input type="text" class="form-control" placeholder="Title of the thing to do..." aria-label="Title" aria-describedby="basic-addon1" name="form_title">
+                <input type="text" class="form-control" placeholder="Title of the thing to do..." aria-label="Title" aria-describedby="basic-addon1" name="form_title"
+                {% if fdat["title"] is not none %}
+                value="{{ fdat["title"] }}"
+                {% endif %}
+                >
               </div>
 
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon2">Description</span>
-                <textarea class="form-control" placeholder="What has to be done?" aria-label="Description" aria-describedby="basic-addon2" name="form_description"></textarea>
+                <textarea class="form-control" placeholder="What has to be done?" aria-label="Description" aria-describedby="basic-addon2" name="form_description">{% if fdat["description"] is not none %}{{ fdat["description"] }}{% endif %}</textarea>
               </div>
+
+              <input type="hidden" name="form_taskid" value="{{ fdat["taskid"] }}">
               
               <label for="basic-url" class="form-label">Have a deadline?</label>
               <div class="input-group mb-3">

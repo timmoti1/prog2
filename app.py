@@ -115,9 +115,19 @@ def display_archived():
 def edit_note():
 
     if request.method == "POST":
+        title = request.form.get("form_title")
+        description = request.form.get("form_description")
+        taskid = request.form.get("form_taskid", type=int)
+        duedate = request.form.get("form_duedate")
+        today_str = datetime.date.today().strftime("%Y-%m-&d")
 
-
-    if request.method == "GET":
+        if taskid == 0:
+            write_db("insert into todo (title, content, modification_date, due_date, status) values (?, ?, ?, ?, 0)", [title, description, today_str, duedate])
+        
+        else:
+            write_db("update todo set title = ?, content = ?, modification_date = ?, due_date = ?", [title, description, today_str, duedate])
+        
+        return redirect(url_for("display_backlog"))
 
     
     task_id = request.args.get('tid', type=int)    
