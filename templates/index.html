@@ -69,7 +69,9 @@
               <p class="mb-1">{{ item["description"] }}</p>
               <div class="btn-group" role="group" aria-label="Basic example">
                 <a href="/edit?tid={{ item["taskid"] }}" class="btn btn-primary">Edit</a>
+                {% if page < 3 %}
                 <a href="/edit?tid={{ item["taskid"] }}&action=move" type="button" class="btn btn-primary">Move To Next Bucket</a>
+                {% endif %}
                 <a href="/edit?tid={{ item["taskid"] }}&action=delete" type="button" class="btn btn-danger">Delete</a>
               </div>
             </div>
