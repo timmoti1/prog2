@@ -70,9 +70,10 @@ def display_active():
     #convert results to dict per our own specifications
     for item in list_items:
         entry = dict()
+        entry["taskid"] = item[0]
         entry["title"] = item[1]
         entry["description"] = item[2]
-        entry["modified"] = "today"
+        entry["modified"] = item[3]
         
         active_list.append(entry)
     
@@ -87,9 +88,10 @@ def display_done():
     #convert results to dict per our own specifications
     for item in list_items:
         entry = dict()
+        entry["taskid"] = item[0]
         entry["title"] = item[1]
         entry["description"] = item[2]
-        entry["modified"] = "today"
+        entry["modified"] = item[3]
         
         done_list.append(entry)
     
@@ -104,9 +106,10 @@ def display_archived():
     #convert results to dict per our own specifications
     for item in list_items:
         entry = dict()
+        entry["taskid"] = item[0]
         entry["title"] = item[1]
         entry["description"] = item[2]
-        entry["modified"] = "today"
+        entry["modified"] = item[3]
         
         archived_list.append(entry)
 
