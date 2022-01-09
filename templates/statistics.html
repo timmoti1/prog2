@@ -50,16 +50,16 @@
               <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ pbar["archived"] }}%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <p class="mb-1">
-              <span class="badge bg-primary">Backlog (count)</span>
+              <span class="badge bg-primary">Backlog ({{ sta[0] }})</span>
             </p>
             <p class="mb-1">
-              <span class="badge bg-warning text-dark">Active (count)</span>
+              <span class="badge bg-warning text-dark">Active ({{ sta[1] }})</span>
             </p>
             <p class="mb-1">
-              <span class="badge bg-success">Done (count)</span>
+              <span class="badge bg-success">Done ({{ sta[2] }})</span>
             </p>
             <p class="mb-1">
-              <span class="badge bg-secondary">Archived (count)</span>
+              <span class="badge bg-secondary">Archived ({{ sta[3] }})</span>
             </p>
           </a>
         </div>

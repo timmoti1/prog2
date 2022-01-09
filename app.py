@@ -171,8 +171,25 @@ def statisitcs():
     This function gets all items from DB and calculates the percentage per category and passes a dict to template.
     """
 
+    pbar = dict()
+    stat_num = list()
 
-    return render_template('statistics.html', pbar={"backlog": 10, "active": 10, "done": 10, "archived": 10})
+    for i in range(4):
+        li = query_db("select * from todo where status = ?", [i])
+        stat_num.append(len(li))
+
+    total = sum(stat_num)
+
+    print(stat_num)
+
+    pbar["backlog"] = stat_num[0]/total * 100
+    pbar["active"] = stat_num[1]/total * 100
+    pbar["done"] = stat_num[2]/total * 100
+    pbar["archived"] = stat_num[3]/total * 100
+
+    print(pbar)
+
+    return render_template('statistics.html', pbar=pbar, sta=stat_num)
 
 @app.route('/js/<path:path>')
 def send_js(path):
