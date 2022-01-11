@@ -36,6 +36,22 @@ def write_db(query, args=()):
 app = Flask(__name__)
 app.secret_key = 'hey bob, this is my secret love letter to you.' #what alice might have said, but eve would not understand it.
 
+def getTaskList(status):
+    list_items = query_db("select * from todo where status = ?", [status])
+    task_list = []
+
+    #convert results to dict per our own specifications
+    for item in list_items:
+        entry = dict()
+        entry["taskid"] = item[0]
+        entry["title"] = item[1]
+        entry["description"] = item[2]
+        entry["modified"] = item[3]
+        
+        task_list.append(entry)
+    
+    return task_list
+
 @app.route("/")
 def default_route():
     """
@@ -46,72 +62,28 @@ def default_route():
 @app.route("/backlog")
 def display_backlog():
 
-    list_items = query_db("select * from todo where status = 0")
-    backlog_list = []
-
-    #convert results to dict per our own specifications
-    for item in list_items:
-        entry = dict()
-        entry["taskid"] = item[0]
-        entry["title"] = item[1]
-        entry["description"] = item[2]
-        entry["modified"] = item[3]
-        
-        backlog_list.append(entry)
+    backlog_list = getTaskList(0)
 
     return render_template('index.html', page=0, items=backlog_list)
 
 @app.route("/active")
 def display_active():
 
-    list_items = query_db("select * from todo where status = 1")
-    active_list = []
-
-    #convert results to dict per our own specifications
-    for item in list_items:
-        entry = dict()
-        entry["taskid"] = item[0]
-        entry["title"] = item[1]
-        entry["description"] = item[2]
-        entry["modified"] = item[3]
-        
-        active_list.append(entry)
+    active_list = getTaskList(1)
     
     return render_template('index.html', page=1, items=active_list)
 
 @app.route("/done")
 def display_done():
 
-    list_items = query_db("select * from todo where status = 2")
-    done_list = []
-
-    #convert results to dict per our own specifications
-    for item in list_items:
-        entry = dict()
-        entry["taskid"] = item[0]
-        entry["title"] = item[1]
-        entry["description"] = item[2]
-        entry["modified"] = item[3]
-        
-        done_list.append(entry)
+    done_list = getTaskList(2)
     
     return render_template('index.html', page=2, items=done_list)
 
 @app.route("/archived")
 def display_archived():
 
-    list_items = query_db("select * from todo where status = 3")
-    archived_list = []
-
-    #convert results to dict per our own specifications
-    for item in list_items:
-        entry = dict()
-        entry["taskid"] = item[0]
-        entry["title"] = item[1]
-        entry["description"] = item[2]
-        entry["modified"] = item[3]
-        
-        archived_list.append(entry)
+    archived_list = getTaskList(3)
 
     return render_template('index.html', page=3, items=archived_list)
 
