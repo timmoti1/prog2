@@ -47,6 +47,19 @@ def getTaskList(status):
         entry["title"] = item[1]
         entry["description"] = item[2]
         entry["modified"] = item[3]
+
+        due_date = datetime.datetime.strptime(item[4], "%Y-%m-%d").date()
+        days_left = due_date - datetime.date.today()
+        
+        if(days_left.days == 1):
+            print("due tomorrow")
+        
+        if(days_left.days == 0):
+            print("due today")
+        
+        if(days_left.days < 0):
+            print("overdue")
+        
         
         task_list.append(entry)
     
