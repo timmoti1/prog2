@@ -52,13 +52,19 @@ def getTaskList(status):
         days_left = due_date - datetime.date.today()
         
         if(days_left.days == 1):
-            print("due tomorrow")
+            entry["due"] = True
+            entry["due_color"] = "bg-warning"
+            entry["due_text"] = "Due Tomorrow"
         
         if(days_left.days == 0):
-            print("due today")
+            entry["due"] = True
+            entry["due_color"] = "bg-warning"
+            entry["due_text"] = "Due Today"
         
         if(days_left.days < 0):
-            print("overdue")
+            entry["due"] = True
+            entry["due_color"] = "bg-danger"
+            entry["due_text"] = "Overdue"
         
         
         task_list.append(entry)

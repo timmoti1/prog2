@@ -62,7 +62,7 @@
           {% for item in items %}
           <div class="list-group-item list-group-item-action" aria-current="true">
             <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">{{ item["title"] }}</h5>
+              <h5 class="mb-1">{{ item["title"] }} {% if item["due"] %} <span class="badge {{ item["due_color"] }}">{{ item["due_text"] }}</span>{% endif %}</h5>
               <small class="text-muted">{{ item["modified"] }}</small>
             </div>
             <div class="d-flex w-100 justify-content-between">
