@@ -37,6 +37,12 @@ app = Flask(__name__)
 app.secret_key = 'hey bob, this is my secret love letter to you.' #what alice might have said, but eve would not understand it.
 
 def getTaskList(status):
+    """
+    This function gets the task list from DB, makes a dict out of the items and returns it. 
+    Status parameter can be 0, 1, 2, 3 (backlog, active, done, archived)
+
+    it also computes the time left per task in days.
+    """
     list_items = query_db("select * from todo where status = ?", [status])
     task_list = []
 
@@ -48,8 +54,8 @@ def getTaskList(status):
         entry["description"] = item[2]
         entry["modified"] = item[3]
 
-        due_date = datetime.datetime.strptime(item[4], "%Y-%m-%d").date()
-        days_left = due_date - datetime.date.today()
+        due_date = datetime.datetime.strptime(item[4], "%Y-%m-%d").date() #parse date from database entry
+        days_left = due_date - datetime.date.today() # calculate difference to today
         
         if(days_left.days == 1):
             entry["due"] = True
@@ -108,6 +114,10 @@ def display_archived():
 
 @app.route("/edit", methods=["GET", "POST"])
 def edit_note():
+    """
+    edits the note if it already exists or creates it if it does not exist.
+    if it exists, data from DB will be passed to the template to see the current information on the task.
+    """
 
     if request.method == "POST":
         title = request.form.get("form_title")
