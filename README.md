@@ -34,3 +34,5 @@ Limitations:
 
 ## Project Idea
 
+I had the idea for this project because I like to plan and I think SCRUM is a good way to do structured planning.
+The goal of this simple yet effective project is that it shall be useful in one way or another in the future.
