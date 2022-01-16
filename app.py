@@ -54,8 +54,12 @@ def getTaskList(status):
         entry["description"] = item[2]
         entry["modified"] = item[3]
 
-        due_date = datetime.datetime.strptime(item[4], "%Y-%m-%d").date() #parse date from database entry
-        days_left = due_date - datetime.date.today() # calculate difference to today
+        #bugfix
+        if item[4] is not "":
+            due_date = datetime.datetime.strptime(item[4], "%Y-%m-%d").date() #parse date from database entry
+            days_left = due_date - datetime.date.today() # calculate difference to today
+        else:
+            days_left = datetime.timedelta(days=10) #set days left to a bunch of days so that the badge won't be displayed
         
         if(days_left.days == 1):
             entry["due"] = True
