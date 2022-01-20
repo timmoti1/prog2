@@ -5,7 +5,7 @@ Das Akronym steht für supercoole wirklich nützliche Mini-TODO-Liste bei der ma
 ## Installation
 
 Installieren Sie zuallererst Flask, falls die noch nicht geschehen ist. Der Server läuft im Debug-Modus und kann durch Eingabe von ```python3 app.py``` in der Konsole gestartet werden.
-Die App sollte nun laufen. In der Konsole sollte eine Adresse und ein Port zu sehen sein, der beim Öffnen die Web-App anzeigt, dieser sollte folgendermassen lauter ```http://127.0.0.1:5000```.
+Die App sollte nun laufen. In der Konsole sollte eine Adresse und ein Port zu sehen sein, der beim Öffnen die Web-App anzeigt, dieser sollte folgendermassen lauter ```http://127.0.0.1:5000```. Alternativ kann man das app.py auch in einer IDE (z.B pycharm) öffnen und es dort ausführen. Danach wird in der Konsole eben falls dieser Link ```http://127.0.0.1:5000``` angezeigt. Durch das darauf klicken öffnet sich der Browser mit der App.
 
 ## Fähigkeiten und Verwendung
 
