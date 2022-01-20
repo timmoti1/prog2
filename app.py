@@ -55,7 +55,7 @@ def getTaskList(status):
         entry["modified"] = item[3]
 
         #bugfix
-        if item[4] is not "":
+        if item[4] != "":
             due_date = datetime.datetime.strptime(item[4], "%Y-%m-%d").date() #parse date from database entry
             days_left = due_date - datetime.date.today() # calculate difference to today
         else:
