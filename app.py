@@ -185,14 +185,16 @@ def statisitcs():
 
     total = sum(stat_num)
 
-    print(stat_num)
-
-    pbar["backlog"] = stat_num[0]/total * 100
-    pbar["active"] = stat_num[1]/total * 100
-    pbar["done"] = stat_num[2]/total * 100
-    pbar["archived"] = stat_num[3]/total * 100
-
-    print(pbar)
+    if total >= 1:
+        pbar["backlog"] = stat_num[0]/total * 100
+        pbar["active"] = stat_num[1]/total * 100
+        pbar["done"] = stat_num[2]/total * 100
+        pbar["archived"] = stat_num[3]/total * 100
+    else:
+        pbar["backlog"] = 0
+        pbar["active"] = 0
+        pbar["done"] = 0
+        pbar["archived"] = 0
 
     return render_template('statistics.html', pbar=pbar, sta=stat_num)
 
